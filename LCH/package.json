@@ -1,0 +1,15 @@
+{
+  "name": "theme-project",
+  "version": "1.0.0",
+  "description": "simple theme project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "andie yam",
+  "license": "MIT",
+  "dependencies": {
+    "hsluv": "^0.1.0"
+  }
+}

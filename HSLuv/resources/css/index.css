@@ -1,0 +1,43 @@
+
+* {
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  
+  
+  h1 {
+    color: rgb(1, 10, 5);
+  }
+  
+  
+  p, 
+  li {
+    font-size: 16px;
+  }
+  
+  
+  a {
+    text-decoration: none;
+  }
+
+  .col {
+    float: left;
+    /* height: 50px; */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .row {
+    float: left;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 8px;
+  }
+
+  .cell{
+    float: left;
+    width: 50px;
+    font-size: 12px;
+    color: #ffffff
+    /* flex-grow: 1; */
+  }
