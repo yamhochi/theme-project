@@ -1,4 +1,5 @@
 import { scale } from "./scale.js";
+import {chroma_range} from "./chroma.js"
 
 export function generate_hues(LCH, number_of_hues) {
     // let h = HSL[0]
@@ -38,14 +39,24 @@ export function generate_hues(LCH, number_of_hues) {
     const hues_container = document.createElement("div");
     hues_container.className = "hues_container";
     
-    console.log("huearray", hue_array)
+    // console.log("huearray", hue_array)
     hue_array.forEach(function (key, value) {
         console.log(key, value)
         // create the row element for each hue
         const row = document.createElement("div");
         row.className = "row hues";
-        row.id=value
-        row.innerHTML = "<span classname=\"metadata\" style= \"width:200px\">h" + value + " , c" + c + ", l" + l + "</span>"
+        row.id=value;
+        row.dataset.h = key;
+        row.dataset.l = l;
+        //find the chroma range of this key and l combo
+        var c_range = chroma_range(l,c,key)
+        if(c>c_range.max){
+            c=c_range.max
+        }else if(c<c_range.min){
+            c=c_range.min
+        }
+        row.dataset.c = c;
+        row.innerHTML = "<span class=\"metadata\" style= \"width:200px\">h" + key + " , c" + c + ", l" + l + "</span>"
 
         //now add the cells created into the row
         var cells = scale(l, c, key)
@@ -58,10 +69,12 @@ export function generate_hues(LCH, number_of_hues) {
         //create the slider
         const hue_slider = document.createElement("input");
         hue_slider.type = "range";
-        hue_slider.min = "0";
-        hue_slider.max = "360";
+        hue_slider.min = "0.00";
+        hue_slider.max = "360.00";
+        hue_slider.step = "0.01";
         hue_slider.value = key;
-        hue_slider.id = value;
+        hue_slider.id = value+"_slider";
+        hue_slider.className="slider"
         row.append(hue_slider)
 
         //finally add it to the document  
@@ -71,6 +84,11 @@ export function generate_hues(LCH, number_of_hues) {
 
 }
 
+
+// slider.oninput = function() {
+//     output.innerHTML = this.value;
+//   }
 //hue slider
-//get the div with the same value
-//get the hcl value of 
+//get all the divs with cell spread
+//this is now the new h
+// update scales
